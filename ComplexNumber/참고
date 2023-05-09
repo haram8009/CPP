@@ -1,0 +1,34 @@
+https://blockdmask.tistory.com/527
+
+c + myComplex
+c - myComplex
+c * myComplex
+
+이런식으로 int가 먼저 나올 경우
+i.operator+(c);
+
+https://yeolco.tistory.com/119
+>> , << operator 오버로딩
+
+MyComplex.cpp:57:11: error: 'myComplex myComplex::operator+(int, const myComplex&)' must have either zero or one argument 57 | myComplex myComplex::operator +(int value, const myComplex& number) // c+(a,b) | ^~~~~~~~~ MyComplex.cpp: In member function 'myComplex myComplex::operator-(const myComplex&) const': MyComplex.cpp:64:37: error: 'const class myComplex' has no member named 'RealPart'; did you mean 'realPart'? 64 | int newReal = realPart - number.RealPart; | ^~~~~~~~ | realPart MyComplex.cpp:65:19: error: 'imageinaryPart' was not declared in this scope; did you mean 'imaginaryPart'? 65 | int newImag = imageinaryPart - number.ImaginaryPart; | ^~~~~~~~~~~~~~ | imaginaryPart MyComplex.cpp:65:43: error: 'const class myComplex' has no member named 'ImaginaryPart'; did you mean 'imaginaryPart'? 65 | int newImag = imageinaryPart - number.ImaginaryPart; | ^~~~~~~~~~~~~ | imaginaryPart MyComplex.cpp: At global scope: MyComplex.cpp:72:11: error: 'myComplex myComplex::operator-(int, const myComplex&)' must have either zero or one argument 72 | myComplex myComplex::operator -(int value, const myComplex& number) // c-(a,b) | ^~~~~~~~~ MyComplex.cpp: In member function 'myComplex myComplex::operator*(const myComplex&) const': MyComplex.cpp:79:38: error: 'const class myComplex' has no member named 'RealPart'; did you mean 'realPart'? 79 | int newReal = (realPart * number.RealPart) - (imageinaryPart * number.ImaginaryPart); | ^~~~~~~~ | realPart MyComplex.cpp:79:51: error: 'imageinaryPart' was not declared in this scope; did you mean 'imaginaryPart'? 79 | int newReal = (realPart * number.RealPart) - (imageinaryPart * number.ImaginaryPart); | ^~~~~~~~~~~~~~ | imaginaryPart MyComplex.cpp:79:75: error: 'const class myComplex' has no member named 'ImaginaryPart'; did you mean 'imaginaryPart'? 79 | int newReal = (realPart * number.RealPart) - (imageinaryPart * number.ImaginaryPart); | ^~~~~~~~~~~~~ | imaginaryPart MyComplex.cpp:80:56: error: 'ImaginaryPart' was not declared in this scope; did you mean 'imaginaryPart'? 80 | int newImag = (realPart * number.imaginaryPart) + (ImaginaryPart * number.realPart); | ^~~~~~~~~~~~~ | imaginaryPart MyComplex.cpp: At global scope: MyComplex.cpp:87:11: error: 'myComplex myComplex::operator*(int, const myComplex&)' must have either zero or one argument 87 | myComplex myComplex::operator *(int value, const myComplex& number) //c*(a,b) | ^~~~~~~~~
+
+
+
+
+// 이것만 고치면 끝...
+MyComplex.cpp:57:11: error: 'myComplex myComplex::operator+(int, const myComplex&)' must have either zero or one argument 57 | 
+myComplex myComplex::operator +(int value, const myComplex& number) // c+(a,b) |
+^~~~~~~~~ 
+MyComplex.cpp:72:11: error: 'myComplex myComplex::operator-(int, const myComplex&)' must have either zero or one argument 72 | 
+myComplex myComplex::operator -(int value, const myComplex& number) // c-(a,b) | 
+^~~~~~~~~ 
+MyComplex.cpp:87:11: error: 'myComplex myComplex::operator*(int, const myComplex&)' must have either zero or one argument 87 |
+myComplex myComplex::operator *(int value, const myComplex& number) //c*(a,b) | 
+^~~~~~~~~
+
+https://stackoverflow.com/questions/62576373/operator-over-loading-operatormust-take-either-zero-or-one-argument
+스택오버플로우에서 참고 ㅠㅠㅠ
+
+myComplex::
+이 부분을 지움
+드디어 빨간 선과 must take either zero or one argument 메시지가 사라짐
